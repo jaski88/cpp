@@ -1,9 +1,10 @@
 #include <iostream>
 
 #include "array.h"
+#include "sort.h"
 
 #include <array>
-
+#include <vector>
 
 using namespace std;
 
@@ -19,6 +20,10 @@ main( int argc, char* argv[] )
     std::array< int, 7 > binary_array = { 0 , 1 , 0 , 1, 0, 1, 0 };
     Array::sort_binary_array( binary_array );
     std::cout << "binary array: " << Array::to_str( binary_array ) << std::endl;
+
+    std::vector< int > vec = { 5 , 2 , 7 , 9 , 0 , 0 };
+    sort::bubble( vec );
+    std::cout << "bubble sort: " << Array::to_str( vec ) << std::endl;
 
     return 0;
 }
