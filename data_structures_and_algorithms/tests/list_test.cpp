@@ -1,44 +1,42 @@
-#include "list_test.h"
-
 #include "../list.h"
 
-namespace tests
+#include <boost/test/unit_test.hpp>
+
+namespace list_tests
 {
-bool
-ListTest::push_pop( )
+BOOST_AUTO_TEST_SUITE( list_test_suite )
+
+BOOST_AUTO_TEST_CASE( push_pop )
 {
     List< int > list;
     list.push_front( 0 );
     list.push_front( 1 );
     list.push_front( 2 );
 
-    bool success = true;
+    BOOST_CHECK_EQUAL( list.count( ), 3 );
 
-    success &= ( list.count( ) == 3 );
+    BOOST_CHECK_EQUAL( 2, list.pop_front( ) );
+    BOOST_CHECK_EQUAL( 1, list.pop_front( ) );
+    BOOST_CHECK_EQUAL( 0, list.pop_front( ) );
 
-    success &= 2 == list.pop_front( );
-    success &= 1 == list.pop_front( );
-    success &= 0 == list.pop_front( );
-
-    success &= ( list.count( ) == 0 && list.empty( ) );
+    BOOST_CHECK( list.empty( ) );
+    BOOST_CHECK_EQUAL( list.count( ), 0 );
 
     list.push_back( 0 );
     list.push_back( 1 );
     list.push_back( 2 );
 
-    success &= ( list.count( ) == 3 );
+    BOOST_CHECK_EQUAL( list.count( ), 3 );
 
-    success &= 2 == list.pop_back( );
-    success &= 1 == list.pop_back( );
-    success &= 0 == list.pop_back( );
+    BOOST_CHECK_EQUAL( 2, list.pop_back( ) );
+    BOOST_CHECK_EQUAL( 1, list.pop_back( ) );
+    BOOST_CHECK_EQUAL( 0, list.pop_back( ) );
 
-    success &= ( list.count( ) == 0 && list.empty( ) );
-
-    return success;
+    BOOST_CHECK( list.empty( ) );
+    BOOST_CHECK_EQUAL( list.count( ), 0 );
 }
 
-bool
-ListTest::insert_remove( )
+BOOST_AUTO_TEST_CASE( insert_remove )
 {
     const size_t LIST_SIZE = 10;
 
@@ -49,19 +47,16 @@ ListTest::insert_remove( )
         list.insert( i, i );
     }
 
-    bool success = true;
+    BOOST_CHECK( !list.insert( 50, 0 ) );
+    BOOST_CHECK( list.remove( 9 ) );
+    BOOST_CHECK( list.remove( 5 ) );
+    BOOST_CHECK( list.remove( 0 ) );
+    BOOST_CHECK( !list.remove( 50 ) );
 
-    success &= !list.insert( 50, 0 );
-    success &= list.remove( 9 );
-    success &= list.remove( 5 );
-    success &= list.remove( 0 );
-    success &= !list.remove( 50 );
-
-    return success && ( list.count( ) == 7 );
+    BOOST_CHECK_EQUAL( list.count( ), 7 );
 }
 
-bool
-ListTest::interate_loop( )
+BOOST_AUTO_TEST_CASE( interate_loop )
 {
     const size_t LIST_SIZE = 10;
 
@@ -78,11 +73,10 @@ ListTest::interate_loop( )
         i++;
     }
 
-    return i == LIST_SIZE;
+    BOOST_CHECK( i == LIST_SIZE );
 }
 
-bool
-ListTest::for_loop( )
+BOOST_AUTO_TEST_CASE( for_loop )
 {
     const size_t LIST_SIZE = 10;
 
@@ -99,12 +93,8 @@ ListTest::for_loop( )
         i++;
     }
 
-    return i == LIST_SIZE;
+    BOOST_CHECK( i == LIST_SIZE );
 }
 
-bool
-ListTest::run_all( )
-{
-    return push_pop( ) && insert_remove( ) && interate_loop( ) && for_loop( );
-}
+BOOST_AUTO_TEST_SUITE_END( )
 }

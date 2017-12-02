@@ -5,6 +5,8 @@
 #include <numeric>
 #include <unordered_map>
 #include <algorithm>
+#include <vector>
+#include <iostream>
 
 class Array
 {

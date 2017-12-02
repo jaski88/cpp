@@ -1,32 +1,30 @@
-#include "bst_test.h"
 #include "../bstree.h"
 
-namespace tests
-{
-bool
-BSTreeTest::run_all( )
-{
-    return insert_remove( );
-}
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MAIN
+#include <boost/test/unit_test.hpp>
 
-bool
-BSTreeTest::insert_remove( )
+namespace bst_tests
+{
+BOOST_AUTO_TEST_SUITE( bst_test_suite )
+
+BOOST_AUTO_TEST_CASE( insert_remove )
 {
     BSTree< int > tree;
 
-    bool success = true;
+    BOOST_CHECK( tree.insert( 10 ) );
+    BOOST_CHECK( tree.insert( 5 ) );
+    BOOST_CHECK( tree.insert( 8 ) );
+    BOOST_CHECK( tree.insert( 9 ) );
+    BOOST_CHECK( tree.insert( 7 ) );
+    BOOST_CHECK( tree.insert( 3 ) );
+    BOOST_CHECK( tree.insert( 1 ) );
+    BOOST_CHECK( tree.insert( 4 ) );
+    BOOST_CHECK( tree.insert( 2 ) );
+    BOOST_CHECK( tree.insert( 6 ) );
 
-    success &= tree.insert( 10 );
-    success &= tree.insert( 5 );
-    success &= tree.insert( 8 );
-    success &= tree.insert( 9 );
-    success &= tree.insert( 7 );
-    success &= tree.insert( 3 );
-    success &= tree.insert( 1 );
-    success &= tree.insert( 4 );
-    success &= tree.insert( 2 );
-    success &= tree.insert( 6 );
-
-    return success;
+    BOOST_CHECK_EQUAL( tree.count( ), 10 );
 }
+
+BOOST_AUTO_TEST_SUITE_END( )
 }
