@@ -1,6 +1,5 @@
-#include <iostream>
-
-using namespace std;
+#ifndef FIBONACCI_H
+#define FIBONACCI_H
 
 template < const int N >
 struct Fibonacci
@@ -20,9 +19,4 @@ struct Fibonacci< 0 >
     static const int value = 1;
 };
 
-int
-main( int argc, char* argv[] )
-{
-    cout << "Fib(10) = " << Fibonacci< 10 >::value << endl;
-    return 0;
-}
+#endif // FIBONACCI_H
